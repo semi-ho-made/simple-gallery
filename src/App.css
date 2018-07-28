@@ -5,17 +5,27 @@
 
 
 .header {
+  padding: 2em .5em 2em .5em;
 }
 
 .title {
-  padding: 1em .5em .25em .5em;
-  font-size: 2em;
+  font-size: 3em;
   font-weight: 100;
-  color: #666;
+  color: #444;
 }
 
-.intro {
-  font-size: large;
+.nav {
+  font-size: .8em;
+  margin: .7em 0;
+}
+.button { 
+	padding: .25em 1em;
+	cursor: pointer;
+	color: #888;
+}
+
+.button:hover {
+	color: #000;
 }
 
 .gallerySection {
@@ -26,8 +36,19 @@
 
 
 @media screen and (min-width: 640px) {
+	.header {
+	  padding: 4em .5em 3em .5em;
+	}
 	.title {
 	  font-size: 5em;
+	}
+
+	.nav {
+	  font-size: 1em;
+	  margin: .5em 0;
+	}
+	.button { 
+		padding: .25em 1em;
 	}
 
 	.gallerySection {

@@ -116,7 +116,12 @@
 	display: table-cell;
 	position: relative;
 	width: 100%;
+	vertical-align: middle;
+}
 
+.slideContent {
+	position: relative;
+	line-height: 0;
 }
 .image {
 	width: 100%;
@@ -128,6 +133,7 @@
 	padding: 1em .5em;
 	letter-spacing: .2em;
 	font-size: .7em;
+	line-height: initial;
 	background: rgba(0,0,0, .5);
 	color: #eee;
 }

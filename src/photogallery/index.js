@@ -60,6 +60,7 @@ class PhotoGallery extends Component {
 
 	render() {
 		const { imageSet } = this.props;
+
 		const slider_width = imageSet.length * 100;
 		const singleSlide_width = 100/imageSet.length;
 		const slider_position = this.state.currentItem * singleSlide_width * -1;
@@ -67,8 +68,10 @@ class PhotoGallery extends Component {
 		const slides = imageSet.map((image, index)=>{
 			return (
 				<figure className={styles.slide} style={{width: `${singleSlide_width}%`}} key={`slide-${index}`}>
-					<img src={image.url} className={styles.image} alt='' />
-					<figcaption className={styles.caption}>{image.caption}</figcaption>
+					<div className={styles.slideContent}>
+						<img src={image.url} className={styles.image} alt='' />
+						<figcaption className={styles.caption}>{image.caption}</figcaption>
+					</div>
 				</figure>);
 		});
 
