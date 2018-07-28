@@ -1,29 +1,94 @@
 .gallery {
-	border: 2px dotted #faa;
+	position: relative;
 }
 
 .slider {
-	border: 2px dotted #ffa;
 }
 
 .controls {
-	background: #000;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
 }
 
-.button {
+.buttonPrev,
+.buttonNext {
+	position: absolute;
 	display: inline-block;
-	height: 100px;
-	width: 50px;
-	background: #555;
-	cursor: pointer;	
+	top: 50%;
+	transform: translateY(-50%);
+	background: rgba(0,0,0, .4);
+	cursor: pointer;
 }
 
 .buttonPrev {
-	composes: button;
+	left: 0;
 }
 .buttonNext {
-	composes: button;
+	right: 0;
 }
+
+
+.buttonIcon {
+	content: '';
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	margin: 25px;
+	border: 2px solid #aaa;
+	cursor: pointer;
+	transition: border-color .6s;
+}
+
+.buttonPrev .buttonIcon {
+	border-right: none;
+	border-top: none;
+	margin-right: 20px;
+	transform: rotate(45deg);
+}
+.buttonNext .buttonIcon {
+	border-left: none;	
+	border-top: none;
+	margin-left: 20px;
+	transform: rotate(-45deg);
+}
+
+
+.buttonIcon:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 8px;
+    width: 10px;
+    height: 10px;
+	border: 2px solid #aaa;
+
+	transition: border-color .2s; 	
+}
+
+.buttonPrev .buttonIcon:before {
+    left: 3px;
+	border-right: none;
+	border-top: none;
+}
+.buttonNext .buttonIcon:before {
+	border-left: none;	
+	border-top: none;
+    right: 3px;
+}
+
+.buttonPrev .buttonIcon:hover,
+.buttonNext .buttonIcon:hover {
+	border-color: #fff;
+}
+
+.buttonPrev .buttonIcon:hover:before,
+.buttonNext .buttonIcon:hover:before {
+	border-color: #fff;
+}
+
+
 
 
 
@@ -32,11 +97,13 @@
 	overflow: hidden;
 }
 .sliderTrack {
+	display: table;
 	position: relative;
+	transition: transform .5s cubic-bezier(.55,0,.54,1);
 }
 
 .slide {
-	display: inline-block;
+	display: table-cell;
 	position: relative;
 	width: 100%;
 
@@ -49,7 +116,7 @@
 	bottom: 0;
 	width: 100%;
 	padding: 1em;
-	letter-spacing: .5em;
+	letter-spacing: .2em;
 	background: rgba(0,0,0, .5);
 	color: #eee;
 }

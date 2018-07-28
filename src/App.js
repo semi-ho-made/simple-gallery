@@ -12,7 +12,9 @@ class App extends Component {
         </header>
         <p className={styles.intro}>
         </p>
-        <PhotoGallery imageSet={IMAGES} />
+        <div className={styles.gallerySection}>
+          <PhotoGallery imageSet={IMAGES} />
+        </div>
       </div>
     );
   }

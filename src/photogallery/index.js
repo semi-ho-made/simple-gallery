@@ -53,7 +53,7 @@ class PhotoGallery extends Component {
 		const { imageSet } = this.props;
 		const slider_width = imageSet.length * 100;
 		const singleSlide_width = 100/imageSet.length;
-		const slider_position = this.state.currentItem * -100;
+		const slider_position = this.state.currentItem * singleSlide_width * -1;
 
 		const slides = imageSet.map((image, index)=>{
 			return (
@@ -66,13 +66,17 @@ class PhotoGallery extends Component {
 		return (
 			<div className={styles.gallery}>
 				<div ref={this.setSlider} className={styles.slider}>
-					<div className={styles.sliderTrack} style={{left: `${slider_position}%`, width: `${slider_width}%`}}>
+					<div className={styles.sliderTrack} style={{transform: `translateX(${slider_position}%)`, width: `${slider_width}%`}}>
 						{slides}
 					</div>
 				</div>
 				<div className={styles.controls}>
-					<span className={styles.buttonPrev} onClick={this.slideLeft}>Prev</span>
-					<span className={styles.buttonNext} onClick={this.slideRight}>Next</span>
+					<span className={styles.buttonPrev} onClick={this.slideLeft}>
+						<span className={styles.buttonIcon}></span>
+					</span>
+					<span className={styles.buttonNext} onClick={this.slideRight}>
+						<span className={styles.buttonIcon}></span>
+					</span>
 				</div>				
 			</div>);
 	}
@@ -93,8 +97,6 @@ class PhotoGallery extends Component {
 		if(nextItem >= this.state.totalSlides) {
 			nextItem = 0;
 		}
-
-		console.log('----------NEXT: ', nextItem)
 		this.setState({
   		  currentItem: nextItem
 		})
@@ -105,8 +107,6 @@ class PhotoGallery extends Component {
 		if(nextItem < 0) {
 			nextItem = this.state.totalSlides - 1;
 		}
-
-		console.log('----------PREV: ', nextItem)
 		this.setState({
   		  currentItem: nextItem
 		})
