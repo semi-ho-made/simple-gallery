@@ -52,10 +52,14 @@ class PhotoGallery extends Component {
 
 	componentDidMount() {
 		/* Set slider width */
-		this.setSliderLength();
+		this.setTrackWidth();
 	}
 
-	componentWillUnmount() {
+	componentDidUpdate(prevProps) {
+		if(this.props.imageSet !== prevProps.imageSet) {
+			this.setTrackWidth();
+			this.setState({ currentItem: 0 })
+		}
 	}
 
 	render() {
@@ -94,7 +98,7 @@ class PhotoGallery extends Component {
 	}
 
 
-	setSliderLength() {
+	setTrackWidth() {
 		const numChildren = this.props.imageSet.length || 0;
 		const elementInfo = this.sliderElement.getBoundingClientRect();
 		this.sliderWidth = elementInfo.width || this.sliderElement.offsetWidth;
