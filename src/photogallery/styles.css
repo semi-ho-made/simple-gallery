@@ -1,0 +1,55 @@
+.gallery {
+	border: 2px dotted #faa;
+}
+
+.slider {
+	border: 2px dotted #ffa;
+}
+
+.controls {
+	background: #000;
+}
+
+.button {
+	display: inline-block;
+	height: 100px;
+	width: 50px;
+	background: #555;
+	cursor: pointer;	
+}
+
+.buttonPrev {
+	composes: button;
+}
+.buttonNext {
+	composes: button;
+}
+
+
+
+.slider {
+	width: 100%;
+	overflow: hidden;
+}
+.sliderTrack {
+	position: relative;
+}
+
+.slide {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+
+}
+.image {
+	width: 100%;
+}
+.caption {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 1em;
+	letter-spacing: .5em;
+	background: rgba(0,0,0, .5);
+	color: #eee;
+}
