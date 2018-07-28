@@ -28,6 +28,11 @@ class PhotoGallery extends Component {
 		this.slideRight = this.slideRight.bind(this);
 		this.slideLeft = this.slideLeft.bind(this);
 		this.sliderWidth = 0;
+		this.touchStart = this.touchStart.bind(this);
+		this.touchStop = this.touchStop.bind(this);
+		this.startDrag = this.startDrag.bind(this);
+		this.stopDrag = this.stopDrag.bind(this);
+		this.onMouseMove = this.onMouseMove.bind(this);
 
 		this.sliderElement = null;
 
@@ -36,8 +41,12 @@ class PhotoGallery extends Component {
 		}
 
 		this.state = {
-		  totalSlides: 0,
-		  currentItem: 0
+			totalSlides: 0,
+			currentItem: 0,
+			startDragPos: 0,
+			movePos: 0,
+			moveDistance: 0,
+			isDragging: false
 		}
 	}
 
@@ -64,7 +73,7 @@ class PhotoGallery extends Component {
 		});
 
 		return (
-			<div className={styles.gallery}>
+			<div className={styles.gallery} onMouseUp={this.stopDrag} onMouseDown={this.startDrag} onMouseMove={this.onMouseMove} onTouchStart={this.touchStart} onTouchEnd={this.touchStop}>
 				<div ref={this.setSlider} className={styles.slider}>
 					<div className={styles.sliderTrack} style={{transform: `translateX(${slider_position}%)`, width: `${slider_width}%`}}>
 						{slides}
@@ -110,6 +119,61 @@ class PhotoGallery extends Component {
 		this.setState({
   		  currentItem: nextItem
 		})
+	}
+
+
+	getMousePosition(e) {
+		e = e || window.event;
+		let pageX = e.pageX;
+		if (pageX === undefined) {
+			pageX = (e.clientX || (e.targetTouches && e.targetTouches[0] && e.targetTouches[0].clientX) || 0);
+			pageX += document.body.scrollLeft + document.documentElement.scrollLeft;
+		}
+		return pageX;    
+	}
+
+	onMouseMove(event) {
+		if(!this.state.isDragging) { return }
+
+		const dragPos = this.getMousePosition(event);
+		const moveDistance = this.state.moveDistance + (dragPos - this.state.movePos);
+
+		this.setState({
+			movePos: dragPos,
+			moveDistance: moveDistance
+		})
+	}
+
+	startDrag(event) {
+		const currentPos = this.getMousePosition(event);
+
+		this.setState({ 
+			startDragPos: currentPos,
+			movePos: currentPos,
+			isDragging: true
+		});
+	}
+
+	stopDrag(event) {
+		const directionChange = (this.state.startDragPos - this.state.movePos);
+
+		if(directionChange > 0) {
+			this.slideRight();
+		} else if(directionChange < 0) {
+			this.slideLeft();
+		} else {
+			this.setState({ isDragging: false });
+		}
+	}
+
+	touchStart(event) {
+		event.preventDefault();
+		this.startDrag(event);
+	}
+
+	touchStop(event) {
+		event.preventDefault();
+		this.stopDrag(event);
 	}
 }
 

@@ -5,15 +5,13 @@
 
 
 .header {
-  background-color: #222;
-  padding: 20px;
-  color: white;
 }
 
 .title {
+  padding: 1em .5em .25em .5em;
   font-size: 2em;
   font-weight: 100;
-  color: #ccc;
+  color: #666;
 }
 
 .intro {
@@ -21,7 +19,18 @@
 }
 
 .gallerySection {
-	width: 90%;
+	width: 100%;
 	max-width: 1400px;
 	margin: auto;
+}
+
+
+@media screen and (min-width: 640px) {
+	.title {
+	  font-size: 5em;
+	}
+
+	.gallerySection {
+		width: 90%;
+	}
 }
