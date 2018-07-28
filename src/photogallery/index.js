@@ -70,8 +70,12 @@ class PhotoGallery extends Component {
 		const slider_position = this.state.currentItem * singleSlide_width * -1;
 
 		const slides = imageSet.map((image, index)=>{
+			let selectedSlide = false;
+			if(index === this.state.currentItem) {
+				selectedSlide = true;
+			}
 			return (
-				<figure className={styles.slide} style={{width: `${singleSlide_width}%`}} key={`slide-${index}`}>
+				<figure className={styles.slide} data-selected={selectedSlide} style={{width: `${singleSlide_width}%`}} key={`slide-${index}`}>
 					<div className={styles.slideContent}>
 						<img src={image.url} className={styles.image} alt='' />
 						<figcaption className={styles.caption}>{image.caption}</figcaption>
